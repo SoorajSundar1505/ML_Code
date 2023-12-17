@@ -62,6 +62,14 @@ pipeline {
             }
         }
 
+        stage('Print Python Environment') {
+            steps {
+                bat 'where python'
+                bat 'python --version'
+                bat 'python -m pip list'
+            }
+        }
+
         stage('Set Commit Message') {
             steps {
                 script {
