@@ -14,7 +14,7 @@ pipeline {
                 script {
                     // Access the commit message and author
 
-                    def commitMessage = env.CHANGE_MESSAGE ?: 'Default Commit Message'
+                    def commitMessage = env.CHANGE_REQUEST
                     def commitAuthor = env.CHANGE_AUTHOR
                     echo "Commit Message: ${commitMessage}"
                     // echo "Commit Author: ${commitAuthor}"
