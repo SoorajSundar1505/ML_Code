@@ -50,6 +50,15 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install required Python packages
+                    sh 'pip install joblib'
+                }
+            }
+        }
+
         stage('Set Commit Message') {
             steps {
                 script {
