@@ -31,7 +31,7 @@ pipeline {
             steps {
                 // You can call your ml_integration.py script here
                 // For example:
-                sh "python ML_Integration.py '${commitMessage}'"
+                sh "Integration.py '${commitMessage}'"
             }
         }
     }
