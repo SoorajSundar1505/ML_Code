@@ -62,7 +62,7 @@ pipeline {
                         env.CHANGE_MESSAGE = commitMessage
 
                         // Print the commit message for verification
-                        echo "Commit Message: ${env.CHANGE_MESSAGE}"
+                        echo "Commit Message retrieved from GITHUB: ${env.CHANGE_MESSAGE}"
                     } else {
                         error "Failed to retrieve the commit message."
                     }
