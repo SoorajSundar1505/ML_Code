@@ -9,11 +9,18 @@ pipeline {
             }
         }
 
+        stage('Print Environment Variables') {
+            steps {
+                script {
+                    sh 'env'
+                }
+            }
+        }
+
         stage('Read Commit Message and Run ML Integration') {
             steps {
                 script {
                     // Access the commit message and author
-                    sh 'env'
                     def commitMessage = env.CHANGE_REQUEST
                     def commitAuthor = env.CHANGE_AUTHOR
                     echo "Commit Message: ${commitMessage}"
