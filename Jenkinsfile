@@ -1,37 +1,75 @@
+// pipeline {
+//     agent any
+
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 // Checkout the source code.
+//                 checkout scm
+//             }
+//         }
+
+//         stage('Print Environment Variables') {
+//             steps {
+//                 script {
+//                     bat 'set'
+//                 }
+//             }
+//         }
+
+//         stage('Read Commit Message and Run ML Integration') {
+//             steps {
+//                 script {
+//                     // Access the commit message and author
+//                     def commitMessage = env.CHANGE_REQUEST
+//                     def commitAuthor = env.CHANGE_AUTHOR
+//                     echo "Commit Message: ${commitMessage}"
+//                     // echo "Commit Author: ${commitAuthor}"
+
+//                     // Now you can use 'commitMessage' in your ml_integration step
+//                     // For example:
+//                     // sh "Integration.py '${commitMsg}'"
+
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the source code.
-                checkout scm
-            }
-        }
-
-        stage('Print Environment Variables') {
-            steps {
+                // Checkout the code from your version control system (e.g., Git)
                 script {
-                    bat 'set'
+                    checkout scm
                 }
             }
         }
 
-        stage('Read Commit Message and Run ML Integration') {
+        stage('Set Commit Message') {
             steps {
                 script {
-                    // Access the commit message and author
-                    def commitMessage = env.CHANGE_REQUEST
-                    def commitAuthor = env.CHANGE_AUTHOR
-                    echo "Commit Message: ${commitMessage}"
-                    // echo "Commit Author: ${commitAuthor}"
+                    // Get the commit message from Git
+                    def commitMessage = bat(script: 'git log -1 --pretty=%B', returnStatus: true).trim()
 
-                    // Now you can use 'commitMessage' in your ml_integration step
-                    // For example:
-                    // sh "Integration.py '${commitMsg}'"
+                    // Check if the git command was successful
+                    if (commitMessage == 0) {
+                        // Set the environment variable for the commit message
+                        env.CHANGE_MESSAGE = bat(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
 
+                        // Print the commit message for verification
+                        echo "Commit Message retrieved from GITHUB: ${env.CHANGE_MESSAGE}"
+                    } else {
+                        error "Failed to retrieve the commit message."
+                    }
                 }
             }
         }
+
+        // Your other stages go here
     }
 }
