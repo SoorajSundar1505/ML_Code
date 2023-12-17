@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     // Get the commit message from Git
-                    def commitMessage = bat(script: 'git show -s --format=%B', returnStdout: true).trim()
+                    def commitMessage = bat(script: 'git log -1 --pretty=format:"%s%n%n%b"', returnStdout: true).trim()
 
                     // Check if the git command was successful
                     if (!commitMessage.isEmpty()) {
