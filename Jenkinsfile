@@ -17,7 +17,7 @@ pipeline {
                     // def commitMessage = env.CHANGE_MESSAGE ?: 'Default Commit Message'
                     // def commitAuthor = env.CHANGE_AUTHOR
 
-                    commit = sh(returnStdout: true, script: 'git log -1 --oneline').trim()
+                    def commit = sh(returnStdout: true, script: 'git log -1 --oneline').trim()
 
                     String commitMsg = ""
                     
