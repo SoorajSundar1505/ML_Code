@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Access the commit message and author
-
+                    sh 'env'
                     def commitMessage = env.CHANGE_REQUEST
                     def commitAuthor = env.CHANGE_AUTHOR
                     echo "Commit Message: ${commitMessage}"
