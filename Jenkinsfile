@@ -66,6 +66,8 @@ pipeline {
                     } else {
                         error "Failed to retrieve the commit message."
                     }
+
+                    bat "Integration.py '${env.CHANGE_MESSAGE}'"
                 }
             }
         }
