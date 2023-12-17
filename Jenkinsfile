@@ -12,7 +12,7 @@ pipeline {
         stage('Print Environment Variables') {
             steps {
                 script {
-                    sh 'env'
+                    bat 'env'
                 }
             }
         }
