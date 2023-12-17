@@ -1,4 +1,4 @@
-pipeline {
+spipeline {
     agent any
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
         stage('Print Environment Variables') {
             steps {
                 script {
-                    bat 'env'
+                    bat 'set'
                 }
             }
         }
