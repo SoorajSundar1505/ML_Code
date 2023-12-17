@@ -39,6 +39,9 @@
 
 pipeline {
     agent any
+    environment {
+        PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
+    }
     
     stages {
         stage('Checkout') {
@@ -54,7 +57,7 @@ pipeline {
             steps {
                 script {
                     // Install required Python packages
-                    bat 'python3 -m pip install joblib'
+                    bat 'python -m pip install joblib'
                 }
             }
         }
