@@ -32,7 +32,7 @@ pipeline {
 
                     // Now you can use 'commitMessage' in your ml_integration step
                     // For example:
-                    sh "Integration.py '${commitMsg}'"
+                    // sh "Integration.py '${commitMsg}'"
 
                 }
             }
