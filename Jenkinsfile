@@ -59,7 +59,7 @@ pipeline {
                     // Install required Python packages
                     // bat 'python -m pip install --upgrade pip'
                     // bat 'python -m pip install joblib'
-                    bat 'pip install -U scikit-learn'
+                    bat 'python -m pip install -U scikit-learn'
                     // bat 'python -m pip install --upgrade joblib'
                 }
             }
