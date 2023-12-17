@@ -14,19 +14,8 @@ pipeline {
                 script {
                     // Access the commit message and author
 
-                    // def commitMessage = env.CHANGE_MESSAGE ?: 'Default Commit Message'
-                    // def commitAuthor = env.CHANGE_AUTHOR
-
-                    def commit = sh(returnStdout: true, script: 'git log -1 --oneline').trim()
-
-                    String commitMsg = ""
-                    
-                    List commitMsgPre = commit.split(" ")
-                    
-                    for(int i=1; i<commitMsgPre.size(); i++){
-                      commitMsg += commitMsgPre.getAt(i) + " "
-                    }
-
+                    def commitMessage = env.CHANGE_MESSAGE ?: 'Default Commit Message'
+                    def commitAuthor = env.CHANGE_AUTHOR
                     echo "Commit Message: ${commitMsg}"
                     // echo "Commit Author: ${commitAuthor}"
 
