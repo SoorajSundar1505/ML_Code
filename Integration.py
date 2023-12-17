@@ -3,8 +3,8 @@ import json
 import joblib
 
 # Load the trained model and vectorizer
-model_path = '/content/model.pkl'
-vectorizer_path = '/content/vectorizer.pkl'
+model_path = 'model.pkl'
+vectorizer_path = 'vectorizer.pkl'
 
 model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
