@@ -1,6 +1,7 @@
 import sys
 import json
-import joblib
+# import joblib
+from sklearn.externals import joblib
 
 # Load the trained model and vectorizer
 model_path = 'model.pkl'
