@@ -53,24 +53,24 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // Install required Python packages
-                    // bat 'python -m pip install --upgrade pip'
-                    bat 'python -m pip install joblib'
-                    // bat 'python -m pip install --upgrade joblib'
-                }
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         script {
+        //             // Install required Python packages
+        //             // bat 'python -m pip install --upgrade pip'
+        //             bat 'python -m pip install joblib'
+        //             // bat 'python -m pip install --upgrade joblib'
+        //         }
+        //     }
+        // }
 
-        stage('Print Python Environment') {
-            steps {
-                bat 'where python'
-                bat 'python --version'
-                bat 'python -m pip list'
-            }
-        }
+        // stage('Print Python Environment') {
+        //     steps {
+        //         bat 'where python'
+        //         bat 'python --version'
+        //         bat 'python -m pip list'
+        //     }
+        // }
 
         stage('Set Commit Message') {
             steps {
@@ -88,7 +88,7 @@ pipeline {
                     } else {
                         error "Failed to retrieve the commit message."
                     }
-
+                     bat 'python -m pip install joblib'
                     bat "Integration.py '${env.CHANGE_MESSAGE}'"
                 }
             }
