@@ -53,23 +53,22 @@ pipeline {
         stage('Set Commit Message') {
             steps {
                 script {
-                    // Get the commit message from Git
-                    def commitMessage = bat(script: 'git log -1 --pretty=format:"%s%n%n%b"', returnStdout: true).trim()
+                    // Get the commit message from Git using PowerShell
+                    def commitMessage = powershell(returnStdout: true, script: 'git log -1 --pretty=format:"%s%n%n%b"')
 
                     // Check if the git command was successful
                     if (!commitMessage.isEmpty()) {
                         // Set the environment variable for the commit message
-                        env.CHANGE_MESSAGE = commitMessage
+                        env.CHANGE_MESSAGE = commitMessage.trim()
 
                         // Print the commit message for verification
-                        echo "Commit Message retrieved from GITHUB: ${env.CHANGE_MESSAGE}"
+                        echo "Commit Message: ${env.CHANGE_MESSAGE}"
                     } else {
                         error "Failed to retrieve the commit message."
                     }
                 }
             }
         }
-
         // Your other stages go here
     }
 }
