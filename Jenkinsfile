@@ -58,6 +58,7 @@ pipeline {
                 script {
                     // Install required Python packages
                     bat 'python -m pip install joblib'
+                    bat 'python -m pip install --upgrade joblib'
                 }
             }
         }
