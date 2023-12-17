@@ -10,7 +10,7 @@ model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
 
 # Provide a new commit message for testing
-commit_message = os.environ.get('GIT_COMMIT_MESSAGE', '')
+commit_message = os.environ.get('CHANGE_MESSAGE', '')
 
 # Feature extraction
 new_commit_vectorized = vectorizer.transform([commit_message])
