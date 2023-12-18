@@ -27,5 +27,3 @@ outcome_prediction = model.predict(new_commit_vectorized)
 print(f"Predicted Outcome: {outcome_prediction[0]}")
 
 
-
-
