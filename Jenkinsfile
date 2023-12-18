@@ -46,7 +46,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
-         PREDICTED_OUTCOME=0
+         PREDICTED_OUTCOME=''
     }
     
     stages {
