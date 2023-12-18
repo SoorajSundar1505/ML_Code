@@ -27,6 +27,6 @@ outcome_prediction = model.predict(new_commit_vectorized)
 print(f"Predicted Outcome: {outcome_prediction[0]}")
 
 #Return the predicted outcome
-sys.exit({outcome_prediction})
+sys.exit({outcome_prediction[0]})
 
 
