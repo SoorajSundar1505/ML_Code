@@ -66,6 +66,7 @@ pipeline {
                     // bat 'python -m pip install --upgrade pip'
                     // bat 'python -m pip install joblib'
                     bat 'python -m pip install -U joblib'
+                    bat 'python -m pip install scikit-learn==1.2.2'
                     bat 'python -m pip install -U requests'
                     // bat 'python -m pip install --upgrade joblib'
                 }
