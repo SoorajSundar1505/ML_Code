@@ -1,7 +1,11 @@
 import sys
 import json
+import requests
 # import joblib
 from sklearn.externals import joblib
+
+session = requests.Session()
+session.verify = False
 
 # Load the trained model and vectorizer
 model_path = 'model.pkl'
