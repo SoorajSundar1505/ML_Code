@@ -2,7 +2,7 @@ import sys
 import json
 import requests
 # import joblib
-from sklearn.externals import joblib
+ import joblib
 
 session = requests.Session()
 session.verify = False
