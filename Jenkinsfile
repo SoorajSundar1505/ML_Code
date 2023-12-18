@@ -45,7 +45,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
-         // PREDICTED_OUTCOME= -1
+         PREDICTED_OUTCOME= 0
     }
     
     stages {
@@ -109,7 +109,7 @@ pipeline {
                         PREDICTED_OUTCOME = exitCode
                 
                         // Print the predicted outcome for verification
-                        echo "Predicted Outcome: ${PREDICTED_OUTCOME}"
+                        echo "Predicted Outcome in Jenkins: ${PREDICTED_OUTCOME}"
                 
                         // Use the predicted outcome in subsequent stages
                         // Add your logic here
