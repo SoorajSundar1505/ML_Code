@@ -100,7 +100,7 @@ pipeline {
                     
                      // bat 'python -m pip install joblib'
                     PREDICTED_OUTCOME = bat (script: "python Integration.py '${env.CHANGE_MESSAGE}'" , returnStatus: true)
-                    echo "Predicted Outcome is " + PREDICTED_OUTCOME
+                    echo "Complete Output: ${PREDICTED_OUTCOME}"
                 }
             }
         }
