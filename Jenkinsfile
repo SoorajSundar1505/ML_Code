@@ -46,6 +46,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
+         PREDICTED_OUTCOME = -1
     }
     
     stages {
@@ -97,14 +98,15 @@ pipeline {
                     }
                     
                      // bat 'python -m pip install joblib'
-                    bat "python Integration.py '${env.CHANGE_MESSAGE}'"
+                    PREDICTED_OUTCOME = bat (script: "python Integration.py '${env.CHANGE_MESSAGE}'" , returnStatus: true).trim()
+                    echo "Predicted Outcome is " + PREDICTED_OUTCOME
                 }
             }
         }
         stage('Run Regression'){
               steps{
                   script{
-                      if(env.CHANGE_MESSAGE==1){
+                      if(PREDICTED_OUTCOME==1){
                            git 'https://github.com/SoorajSundar1505/restAPI'
                            bat "mvn compile"
                           bat "mvn clean test"
