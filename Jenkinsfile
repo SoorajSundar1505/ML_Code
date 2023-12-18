@@ -40,7 +40,7 @@
 pipeline {
     agent any
     environment {
-        export PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
+         PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
     }
     
     stages {
