@@ -98,7 +98,7 @@ pipeline {
                     }
                     
                      // bat 'python -m pip install joblib'
-                    def MY_PREDICTED_OUTCOME = bat (script: "python Integration.py '${env.CHANGE_MESSAGE}'" , returnStatus: true)
+                    def MY_PREDICTED_OUTCOME = bat (script: "python Integration.py '${env.CHANGE_MESSAGE}'" , returnStatus: true, returnStdout: true, returnStderr: true)
                     echo "Before conversion is: ${MY_PREDICTED_OUTCOME}"
                     MY_PREDICTED_OUTCOME = MY_PREDICTED_OUTCOME as Integer
                     echo "Predicted Outcome is: ${MY_PREDICTED_OUTCOME}"
