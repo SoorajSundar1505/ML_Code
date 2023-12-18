@@ -21,12 +21,12 @@ commit_message = os.environ.get('CHANGE_MESSAGE', '')
 new_commit_vectorized = vectorizer.transform([commit_message])
 
 # Predict the outcome for the commit
-outcome_prediction = model.predict(new_commit_vectorized)
+outcome_prediction = model.predict(new_commit_vectorized)[0]
 
 # Print the outcome prediction result
-print(f"Predicted Outcome: {outcome_prediction[0]}")
+print(f"Predicted Outcome: {outcome_prediction}")
 
 #Return the predicted outcome
-sys.exit({outcome_prediction[0]})
+sys.exit(outcome_prediction)
 
 
