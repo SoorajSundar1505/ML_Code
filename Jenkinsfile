@@ -45,7 +45,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
-         PREDICTED_OUTCOME= -1
+         // PREDICTED_OUTCOME= -1
     }
     
     stages {
@@ -97,10 +97,26 @@ pipeline {
                         error "Failed to retrieve the commit message."
                     }
                     
-                     // bat 'python -m pip install joblib'
-                     def output = bat (script:"python Integration.py '${env.CHANGE_MESSAGE}'" , returnStatus: true)
-                     MY_PREDICTED_OUTCOME = output
-                     echo "My Outcome is: ${MY_PREDICTED_OUTCOME}"
+                     // Run the modified Python script and capture the exit code
+                    def exitCode = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                
+                    // Check if the Python script was successful
+                    if (exitCode == 0 || exitCode == 1) {
+                        // Capture and print the standard output
+                        def scriptOutput = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStdout: true).trim()
+                        echo "Script Output is: ${scriptOutput}"
+                
+                        // Assign the outcome directly, as it's already an integer
+                        PREDICTED_OUTCOME = exitCode
+                
+                        // Print the predicted outcome for verification
+                        echo "Predicted Outcome: ${PREDICTED_OUTCOME}"
+                
+                        // Use the predicted outcome in subsequent stages
+                        // Add your logic here
+                    } else {
+                        error "Failed to retrieve the predicted outcome from Python script. Exit code: ${exitCode}"
+                    }
                 }
             }
         }
