@@ -45,7 +45,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
-         PREDICTED_OUTCOME=0
+         PREDICTED_OUTCOME
     }
     
     stages {
@@ -99,7 +99,7 @@ pipeline {
                     
                      // bat 'python -m pip install joblib'
                      def output = bat (script:"python Integration.py '${env.CHANGE_MESSAGE}'" , returnStdout: true)
-                     PREDICTED_OUTCOME = output 
+                     PREDICTED_OUTCOME = output as Integer
                      echo "Before conversion is: ${output}"
                 }
             }
