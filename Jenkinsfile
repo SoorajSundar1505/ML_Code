@@ -39,6 +39,12 @@
 
 pipeline {
     agent any
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven 'MAVEN_HOME'
+        jdk 'JAVA_HOME'
+    }
+    
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
     }
@@ -96,6 +102,20 @@ pipeline {
                 }
             }
         }
-        // Your other stages go here
+        stage('Run Regression'){
+              steps{
+                  script{
+                      if(env.CHANGE_MESSAGE==1){
+                           git 'https://github.com/SoorajSundar1505/restAPI'
+                           bat "mvn compile"
+                          bat "mvn clean test"
+                          bat "mvn package"
+                      }else{
+                          echo "No need to run regression"
+                      }
+                  }
+              }
+                          
+                      
     }
 }
