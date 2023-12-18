@@ -92,7 +92,7 @@ pipeline {
                     }
                     
                      // bat 'python -m pip install joblib'
-                    bat "Integration.py '${env.CHANGE_MESSAGE}'"
+                    bat "python Integration.py '${env.CHANGE_MESSAGE}'"
                 }
             }
         }
