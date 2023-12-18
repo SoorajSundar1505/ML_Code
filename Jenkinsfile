@@ -79,7 +79,6 @@ pipeline {
         //         bat 'python -m pip list'
         //     }
         // }
-
         stage('Set Commit Message') {
             steps {
                 script {
