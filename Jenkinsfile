@@ -23,7 +23,6 @@
 //                     def commitAuthor = env.CHANGE_AUTHOR
 //                     echo "Commit Message: ${commitMessage}"
 //                     // echo "Commit Author: ${commitAuthor}"
-
 //                     // Now you can use 'commitMessage' in your ml_integration step
 //                     // For example:
 //                     // sh "Integration.py '${commitMsg}'"
