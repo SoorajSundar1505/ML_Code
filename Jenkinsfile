@@ -40,7 +40,6 @@ pipeline {
     }
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
-         PREDICT_OUTCOME=''
     }
     
     stages {
@@ -84,7 +83,7 @@ pipeline {
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
                      def outputFilePath = "output.txt"
-                    bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
+                     bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
                     
                     // Read the content of the file
                     def outcome = readFile(file: outputFilePath).trim()
@@ -98,6 +97,7 @@ pipeline {
                      // PREDICT_OUTCOME = ${outcome}
                      // println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
                     if(outcome=="1"){
+                        echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
                         bat "mvn compile"
                         bat "mvn clean test"
@@ -109,18 +109,13 @@ pipeline {
                 }
             }
         }
-    //     stage('Run Regression'){
-    //           steps{
-    //               script{
-    //                   if(PREDICT_OUTCOME==
-    //                     git 'https://github.com/SoorajSundar1505/restAPI'
-    //                     bat "mvn compile"
-    //                     bat "mvn clean test"
-    //                     bat "mvn package"
-    //               }
-    //           }
-    //     }             
+        stage('Run Regression'){
+              steps{
+                  script{
                       
-    // }
+              }
+        }             
+                      
+    }
 }
 }
