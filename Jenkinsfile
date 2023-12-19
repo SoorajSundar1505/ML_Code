@@ -88,30 +88,28 @@ pipeline {
                     }
                     
                      // Run the modified Python script and capture the exit code
-                    try{
-                        bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                        currentBuild.result = 'SUCCESS'
-                    }catch (Exception ex) {
-                        currentBuild.result = 'FAILURE'
-                    }
-                    // def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                    // currentBuild.result = result
+            
+                        def exitCode = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                        if (exitCode == 1) {
+                            currentBuild.result = 'SUCCESS' // Set it to whatever value makes sense for your pipeline
+                        } else {
+                            currentBuild.result = 'ABORTED'
+                         }
                     echo "Build Result: ${currentBuild.result}"
                    
                 }
             }
         }
         stage('Run Regression'){
+            when {
+                expression { currentBuild.result == 'SUCCESS' }
+            }
               steps{
                   script{
-                      if(currentBuild.result==1){
-                           git 'https://github.com/SoorajSundar1505/restAPI'
-                           bat "mvn compile"
-                          bat "mvn clean test"
-                          bat "mvn package"
-                      }else if(currentBuild.result==0){
-                          echo "No need to run regression"
-                      }
+                        git 'https://github.com/SoorajSundar1505/restAPI'
+                        bat "mvn compile"
+                        bat "mvn clean test"
+                        bat "mvn package"
                   }
               }
         }             
