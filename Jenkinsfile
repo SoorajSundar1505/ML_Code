@@ -88,6 +88,7 @@ pipeline {
                     
                     // Read the content of the file
                     def outcome = readFile(file: outputFilePath).trim()
+
                     
                     // The outcome variable now contains the outcome prediction result
                     echo "Outcome prediction result: ${outcome}"
