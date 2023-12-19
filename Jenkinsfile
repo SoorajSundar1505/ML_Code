@@ -39,7 +39,6 @@ pipeline {
         maven 'MAVEN_HOME'
         jdk 'JAVA_HOME'
     }
-    
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
          PREDICT_OUTCOME=''
