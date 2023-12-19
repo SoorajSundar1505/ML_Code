@@ -96,7 +96,6 @@ pipeline {
                             currentBuild.result = 'ABORTED'
                          }
                     echo "Build Result: ${currentBuild.result}"
-                   
                 }
             }
         }
