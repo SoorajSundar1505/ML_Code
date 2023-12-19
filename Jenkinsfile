@@ -109,13 +109,13 @@ pipeline {
                 }
             }
         }
-        stage('Run Regression'){
-              steps{
-                  script{
+    //     stage('Run Regression'){
+    //           steps{
+    //               script{
                       
-              }
-        }             
+    //           }
+    //     }             
                       
-    }
+    // }
 }
 }
