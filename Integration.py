@@ -1,40 +1,25 @@
 import sys
 import json
-import requests
+import sklearn.externals as extjoblib
 import joblib
-import os
 
-session = requests.Session()
-session.verify = False
+def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
+    # Load the model and vectorizer
+    model = joblib.load(model_path)
+    vectorizer = joblib.load(vectorizer_path)
 
-# Load the trained model and vectorizer
-model_path = 'model.pkl'
-vectorizer_path = 'vectorizer.pkl'
+    # Feature extraction
+    new_commit_vectorized = vectorizer.transform([commit_message])
 
-model = joblib.load(model_path)
-vectorizer = joblib.load(vectorizer_path)
+    # Predict the outcome for the commit
+    outcome_prediction = model.predict(new_commit_vectorized)
 
-# Provide a new commit message for testing
-commit_message = os.environ.get('CHANGE_MESSAGE', '')
+    # Return the outcome prediction result
+    return outcome_prediction[0]
 
-# Feature extraction
-new_commit_vectorized = vectorizer.transform([commit_message])
-
-# Predict the outcome for the commit
-outcome_prediction = model.predict(new_commit_vectorized)[0]
-
-# # Print the outcome prediction result
-# print(f"Predicted Outcome: {outcome_prediction}")
-
-print(f"Exit Code: {int(outcome_prediction == 0)}")  # Will print 0 if the outcome is 0, 1 otherwise
-print(f"Predicted Outcome: {outcome_prediction}")
-
-# Return the predicted outcome
-sys.exit(outcome_prediction)
-
-#Return the predicted outcome
-#Lesson learnt - Dont use sys,exit as it always sends 1
-# sys.exit(outcome_prediction)
-# print(outcome_prediction)
-
+if __name__ == "__main__":
+    import sys
+    commit_message = sys.argv[1] if len(sys.argv) > 1 else "No Commit Message Found"
+    predicted_outcome = predict_commit_outcome(commit_message)
+    print(f"{predicted_outcome}")
 
