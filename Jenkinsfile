@@ -90,7 +90,7 @@ pipeline {
                      // Run the modified Python script and capture the exit code
             
                         def mlResult  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                        def predictedOutcome = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStdout: true, returnStatus: true).text.trim()
+                        def predictedOutcome = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'",returnStatus: true).text.trim()
                     
                         echo "ML Result: ${mlResult}"
                         echo "Predicted Outcome is : ${predictedOutcome}"
