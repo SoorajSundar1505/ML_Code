@@ -88,13 +88,9 @@ pipeline {
                     }
                     
                      // Run the modified Python script and capture the exit code
-                     bat(script: "python Integration.py '${env.CHANGE_MESSAGE}' > output.txt", returnStatus: true)
-                    def predictedOutcome = readFile('output.txt').trim()
+                     def predictedOutcome = powershell(returnStatus: true, script: "python Integration.py '${env.CHANGE_MESSAGE}'")
 
-                    // Cleanup: Delete the temporary file
-                    bat 'del output.txt'
-
-                    echo "Predicted Outcome: ${predictedOutcome}"
+                    echo "Predicted Outcome is the : ${predictedOutcome}"
             
                         currentBuild.result = mlResult == 0 ? 'FAILURE' : 'SUCCESS'
                         echo "Build Result is-->: ${currentBuild.result}"
