@@ -92,12 +92,8 @@ pipeline {
             
                         def mlResult  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
                         echo "ML Result: ${mlResult}"
-                        if (mlResult  == '1') {
-                            currentBuild.result = 'YES' // Set it to whatever value makes sense for your pipeline
-                        } else {
-                            currentBuild.result = 'ABORTED'
-                         }
-                    echo "Build Result: ${currentBuild.result}"
+                        currentBuild.result = mlResult == 0 ? 'FAILURE' : 'SUCCESS'
+                        echo "Build Result: ${currentBuild.result}"
                 }
             }
         }
