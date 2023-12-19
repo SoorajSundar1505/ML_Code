@@ -97,7 +97,7 @@ pipeline {
                     
                      // Run the modified Python script and capture the exit code
                     def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                    echo "currentBuild.result"
+                    echo "Build Result: ${currentBuild.result}"
                    
                 }
             }
