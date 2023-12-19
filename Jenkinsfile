@@ -92,8 +92,8 @@ pipeline {
                      def predictedOutcome = readFile('output.txt').trim()
                      bat 'del output.txt'
                     
-                        echo "ML Result: ${tempFile}"
-                        echo "Predicted Outcome: ${predictedOutcome}"
+                        echo "ML Result from tempFile: ${tempFile}"
+                        echo "Predicted Outcome is red and its value: ${predictedOutcome}"
                     
                         currentBuild.result = mlResult == 0 ? 'FAILURE' : 'SUCCESS'
                         echo "Build Result: ${currentBuild.result}"
