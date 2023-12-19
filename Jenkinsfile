@@ -76,7 +76,6 @@ pipeline {
                     if (!commitMessage.isEmpty()) {
                         // Set the environment variable for the commit message
                         env.CHANGE_MESSAGE = commitMessage.trim()
-
                         // Print the commit message for verification
                         echo "Commit Message: ${env.CHANGE_MESSAGE}"
                     } else {
@@ -84,7 +83,7 @@ pipeline {
                     }
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
-                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStatus: true,returnStdout: true)
+                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStdout: true).trim()
                      println "the output string is: ${outcome}"
                      // PREDICT_OUTCOME = ${outcome}
                      // println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
