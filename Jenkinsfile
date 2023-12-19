@@ -83,8 +83,17 @@ pipeline {
                     }
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
-                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: false,returnStdout: true).trim()
-                     echo "the output string is: ${outcome}"
+                     def outputFilePath = "output.txt"
+                    bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
+                    
+                    // Read the content of the file
+                    def outcome = readFile(file: outputFilePath).trim()
+                    
+                    // The outcome variable now contains the outcome prediction result
+                    echo "Outcome prediction result: ${outcome}"
+                    
+                     // def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: false,returnStdout: true).trim()
+                     // echo "the output string is: ${outcome}"
                      // PREDICT_OUTCOME = ${outcome}
                      // println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
                     
