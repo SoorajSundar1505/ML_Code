@@ -100,7 +100,7 @@ pipeline {
                     if (result  == 0) {
                         currentBuild.result = 'NO'
                     } else {
-                        currentBuild.result = 'REGRESSION'
+                        currentBuild.result = 'YES'
                     }
                    
                 }
@@ -109,7 +109,7 @@ pipeline {
         stage('Run Regression'){
               steps{
                   script{
-                      if(currentBuild.resultIsBetterOrEqualTo('REGRESSION')){
+                      if(currentBuild.resultIsBetterOrEqualTo('YES')){
                            git 'https://github.com/SoorajSundar1505/restAPI'
                            bat "mvn compile"
                           bat "mvn clean test"
