@@ -87,8 +87,8 @@ pipeline {
                         error "Failed to retrieve the commit message."
                     }
                     
-                     def commitMessage = env.CHANGE_MESSAGE
-                     def outcome = bat(script: "python Integration.py \"${commitMessage}\"", returnStatus: true)
+                     def getCommitMessage = env.CHANGE_MESSAGE
+                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
                      echo "Predicted Outcome is: ${outcome}"
 
                     if (outcome == "1") {
