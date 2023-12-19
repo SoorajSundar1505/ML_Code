@@ -88,7 +88,7 @@ pipeline {
                     }
                     
                      def commitMessage = env.CHANGE_MESSAGE
-                     def outcome = bat(script: "python predict_commit.py \"${commitMessage}\"", returnStatus: true)
+                     def outcome = bat(script: "python Integration.py \"${commitMessage}\"", returnStatus: true)
                      echo "Predicted Outcome is: ${outcome}"
 
                     if (outcome == "1") {
