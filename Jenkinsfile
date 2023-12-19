@@ -87,7 +87,7 @@ pipeline {
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
                      // def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStdout: true)
-                    bat for /f %%i in ("python Integration.py \"${getCommitMessage}\"") do set outcome=%%i
+                    bat (script: for /f %%i in ("python Integration.py \"${getCommitMessage}\"") do set outcome=%%i)
 
                     echo Predicted Outcome is : %outcome%
                      // echo "Predicted Outcome is: ${outcome}"
