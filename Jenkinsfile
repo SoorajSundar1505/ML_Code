@@ -87,7 +87,7 @@ pipeline {
                     }
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
-                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStdout: true).trim()
+                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStatus: true,returnStdout: true).trim()
                      println "the output string is: ${outcome}"
                      // PREDICT_OUTCOME = ${outcome}
                      // println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
