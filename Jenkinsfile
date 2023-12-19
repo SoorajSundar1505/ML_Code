@@ -97,6 +97,7 @@ pipeline {
                     
                      // Run the modified Python script and capture the exit code
                     def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                    echo "currentBuild.result"
                     if (result  == 0) {
                         currentBuild.result = 'NO'
                     } else {
@@ -114,7 +115,7 @@ pipeline {
                            bat "mvn compile"
                           bat "mvn clean test"
                           bat "mvn package"
-                      }else{
+                      }else if(currentBuild.resultIsBetterOrEqualTo('NO')){
                           echo "No need to run regression"
                       }
                   }
