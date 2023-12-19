@@ -15,7 +15,14 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     outcome_prediction = model.predict(new_commit_vectorized)
 
     # Return the outcome prediction result
-    return str(outcome_prediction[0])
+    # return str(outcome_prediction[0])
+    # Redirect the standard output to a file
+    
+    with open("output.txt", "w") as f:
+    print(outcome_prediction[0], file=f)
+
+    # Exit with a success code
+    sys.exit(0)
 
 
 if __name__ == "__main__":
