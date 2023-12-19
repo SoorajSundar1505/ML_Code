@@ -22,4 +22,3 @@ if __name__ == "__main__":
     commit_message = sys.argv[1] if len(sys.argv) > 1 else "No Commit Message Found"
     predicted_outcome = predict_commit_outcome(commit_message)
     print(f"{predicted_outcome}")
-
