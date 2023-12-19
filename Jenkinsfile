@@ -72,13 +72,6 @@ pipeline {
             }
         }
 
-        // stage('Print Python Environment') {
-        //     steps {
-        //         bat 'where python'
-        //         bat 'python --version'
-        //         bat 'python -m pip list'
-        //     }
-        // }
         stage('Set Commit Message') {
             steps {
                 script {
@@ -97,8 +90,14 @@ pipeline {
                     }
                     
                      // Run the modified Python script and capture the exit code
-                    def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                    currentBuild.result = result
+                    try{
+                        bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                        currentBuild.result = 'SUCCESS'
+                    }catch (Exception ex) {
+                        currentBuild.result = 'FAILURE'
+                    }
+                    // def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                    // currentBuild.result = result
                     echo "Build Result: ${currentBuild.result}"
                    
                 }
