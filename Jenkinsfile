@@ -88,12 +88,14 @@ pipeline {
                     }
                     
                      // Run the modified Python script and capture the exit code
-                     def mlScriptOutput = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                     def mlResult = mlScriptOutput.take(1) as Integer
-                     def predictedOutcome = mlScriptOutput.drop(1).trim()
-                     
-                    echo "ML Result: ${mlResult}"
+                     bat(script: "python Integration.py '${env.CHANGE_MESSAGE}' > output.txt", returnStatus: true)
+                    def predictedOutcome = readFile('output.txt').trim()
+
+                    // Cleanup: Delete the temporary file
+                    bat 'del output.txt'
+
                     echo "Predicted Outcome: ${predictedOutcome}"
+            
                         currentBuild.result = mlResult == 0 ? 'FAILURE' : 'SUCCESS'
                         echo "Build Result is-->: ${currentBuild.result}"
                 }
