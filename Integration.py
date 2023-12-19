@@ -19,7 +19,7 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # Redirect the standard output to a file
     
     with open("output.txt", "w") as f:
-    print(outcome_prediction[0], file=f)
+        print(outcome_prediction[0], file=f)
 
     # Exit with a success code
     sys.exit(0)
