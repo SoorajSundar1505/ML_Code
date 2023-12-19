@@ -98,11 +98,6 @@ pipeline {
                      // Run the modified Python script and capture the exit code
                     def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
                     echo "currentBuild.result"
-                    if (result  == 0) {
-                        currentBuild.result = 'NO'
-                    } else {
-                        currentBuild.result = 'YES'
-                    }
                    
                 }
             }
@@ -110,12 +105,12 @@ pipeline {
         stage('Run Regression'){
               steps{
                   script{
-                      if(currentBuild.resultIsBetterOrEqualTo('YES')){
+                      if(currentBuild.result==1){
                            git 'https://github.com/SoorajSundar1505/restAPI'
                            bat "mvn compile"
                           bat "mvn clean test"
                           bat "mvn package"
-                      }else if(currentBuild.resultIsBetterOrEqualTo('NO')){
+                      }else if(currentBuild.result==0){
                           echo "No need to run regression"
                       }
                   }
