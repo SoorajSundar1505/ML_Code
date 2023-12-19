@@ -98,6 +98,14 @@ pipeline {
                      // echo "the output string is: ${outcome}"
                      // PREDICT_OUTCOME = ${outcome}
                      // println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
+                    if(outcome.equals("1"){
+                        git 'https://github.com/SoorajSundar1505/restAPI'
+                        bat "mvn compile"
+                        bat "mvn clean test"
+                        bat "mvn package"
+                    }else{
+                        echo "No regression required"
+                    }
                     
                 }
             }
