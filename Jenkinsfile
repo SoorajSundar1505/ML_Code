@@ -89,9 +89,10 @@ pipeline {
                     
                      // Run the modified Python script and capture the exit code
             
-                        def exitCode = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                        if (exitCode == 1) {
-                            currentBuild.result = 'SUCCESS' // Set it to whatever value makes sense for your pipeline
+                        def mlResult  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                        echo "ML Result: ${mlResult}"
+                        if (mlResult  == '1') {
+                            currentBuild.result = 'YES' // Set it to whatever value makes sense for your pipeline
                         } else {
                             currentBuild.result = 'ABORTED'
                          }
@@ -101,7 +102,7 @@ pipeline {
         }
         stage('Run Regression'){
             when {
-                expression { currentBuild.result == 'SUCCESS' }
+                expression { currentBuild.result == 'YES' }
             }
               steps{
                   script{
