@@ -97,32 +97,20 @@ pipeline {
                     }
                     
                      // Run the modified Python script and capture the exit code
-                    def exitCode = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
-                
-                    // Check if the Python script was successful
-                    if (exitCode == 0 || exitCode == 1) {
-                        // Capture and print the standard output
-                        def scriptOutput = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStdout: true).trim()
-                        echo "Script Output is: ${scriptOutput}"
-                
-                        // Assign the outcome directly, as it's already an integer
-                        PREDICTED_OUTCOME = exitCode
-                
-                        // Print the predicted outcome for verification
-                        echo "Predicted Outcome in Jenkins: ${PREDICTED_OUTCOME}"
-                
-                        // Use the predicted outcome in subsequent stages
-                        // Add your logic here
+                    def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
+                    if (result  == 0) {
+                        currentBuild.result = 'NOTREGRESSION'
                     } else {
-                        error "Failed to retrieve the predicted outcome from Python script. Exit code: ${exitCode}"
+                        currentBuild.result = 'REGRESSION'
                     }
+                   
                 }
             }
         }
         stage('Run Regression'){
               steps{
                   script{
-                      if(PREDICTED_OUTCOME==1){
+                      if(currentBuild.resultIsBetterOrEqualTo('REGRESSION')){
                            git 'https://github.com/SoorajSundar1505/restAPI'
                            bat "mvn compile"
                           bat "mvn clean test"
