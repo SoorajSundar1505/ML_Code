@@ -98,7 +98,7 @@ pipeline {
                      // Run the modified Python script and capture the exit code
                     def result  = bat(script: "python Integration.py '${env.CHANGE_MESSAGE}'", returnStatus: true)
                     if (result  == 0) {
-                        currentBuild.result = 'NOTREGRESSION'
+                        currentBuild.result = 'NO'
                     } else {
                         currentBuild.result = 'REGRESSION'
                     }
