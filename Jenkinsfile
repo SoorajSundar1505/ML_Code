@@ -87,13 +87,15 @@ pipeline {
                         error "Failed to retrieve the commit message."
                     }
                     
-                     // Run the modified Python script and capture the exit code
-                     def predictedOutcome = powershell(returnStatus: true, script: "python Integration.py '${env.CHANGE_MESSAGE}'")
+                     def commitMessage = env.CHANGE_MESSAGE
+                     def outcome = bat(script: "python predict_commit.py \"${commitMessage}\"", returnStatus: true)
+                     echo "Predicted Outcome is: ${outcome}"
 
-                    echo "Predicted Outcome is the : ${predictedOutcome}"
-            
-                        currentBuild.result = mlResult == 0 ? 'FAILURE' : 'SUCCESS'
-                        echo "Build Result is-->: ${currentBuild.result}"
+                    if (outcome == "1") {
+                        echo "Positive Outcome"
+                    } else {
+                        echo "Negative Outcome"
+                    }
                 }
             }
         }
