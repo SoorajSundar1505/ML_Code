@@ -17,6 +17,7 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # Return the outcome prediction result
     return outcome_prediction[0]
 
+
 if __name__ == "__main__":
     import sys
     commit_message = sys.argv[1] if len(sys.argv) > 1 else "No Commit Message Found"
