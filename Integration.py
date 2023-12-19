@@ -15,7 +15,7 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     outcome_prediction = model.predict(new_commit_vectorized)
 
     # Return the outcome prediction result
-    return outcome_prediction[0]
+    return str(outcome_prediction[0])
 
 
 if __name__ == "__main__":
