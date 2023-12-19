@@ -43,6 +43,7 @@ pipeline {
     
     environment {
          PATH = "C:\\Users\\suraj\\AppData\\Local\\Programs\\Python\\Python311;${env.PATH}"
+         PREDICT_OUTCOME=''
     }
     
     stages {
@@ -86,33 +87,25 @@ pipeline {
                     }
                     
                      def getCommitMessage = env.CHANGE_MESSAGE
-                     // def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStdout: true)
-                    bat (script: for /f %%i in ("python Integration.py \"${getCommitMessage}\"") do set outcome=%%i)
-
-                    echo Predicted Outcome is : %outcome%
-                     // echo "Predicted Outcome is: ${outcome}"
-
-                    if (outcome == "1") {
-                        echo "Positive Outcome"
-                    } else {
-                        echo "Negative Outcome"
-                    }
+                     def outcome = bat(script: "python Integration.py \"${getCommitMessage}\"",returnStdout: true).trim()
+                     println "the output string is: ${outcome}"
+                     PREDICT_OUTCOME = outcome
+                     println "the PREDICT_OUTCOME string is: ${PREDICT_OUTCOME}"
+                    
                 }
             }
         }
-        stage('Run Regression'){
-            when {
-                expression { currentBuild.result == 'YES' }
-            }
-              steps{
-                  script{
-                        git 'https://github.com/SoorajSundar1505/restAPI'
-                        bat "mvn compile"
-                        bat "mvn clean test"
-                        bat "mvn package"
-                  }
-              }
-        }             
+    //     stage('Run Regression'){
+    //           steps{
+    //               script{
+    //                   if(PREDICT_OUTCOME==
+    //                     git 'https://github.com/SoorajSundar1505/restAPI'
+    //                     bat "mvn compile"
+    //                     bat "mvn clean test"
+    //                     bat "mvn package"
+    //               }
+    //           }
+    //     }             
                       
-    }
+    // }
 }
