@@ -41,7 +41,6 @@ pipeline {
                     } else {
                         error "Failed to retrieve the commit message."
                     }
-                    
                      def getCommitMessage = env.CHANGE_MESSAGE
                      def outputFilePath = "output.txt" 
                      bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
