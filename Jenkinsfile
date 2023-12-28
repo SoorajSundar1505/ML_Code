@@ -41,8 +41,10 @@ pipeline {
                      def getCommitMessage = env.CHANGE_MESSAGE
                      bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
                      def outcome=null
+                     def outputFilePath = null
+                     
                     try{
-                        def outputFilePath = "output.txt" 
+                        outputFilePath = "output.txt" 
                         // Read the content of the file
                         outcome = readFile(file: outputFilePath).trim()
                         // The outcome variable now contains the outcome prediction result
@@ -50,7 +52,9 @@ pipeline {
                     }catch (Exception e) {
                             echo "Predicted outcome is not 1.So skipping the keyword part"
                     }
-                    if(outcome=='login'){
+
+                    def file = new File(outputFilePath)
+                    if(file.exists() && file.text){
                         echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
                         bat "mvn compile"
