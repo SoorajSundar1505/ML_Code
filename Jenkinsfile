@@ -58,11 +58,19 @@ pipeline {
                         bat "mvn package"
                     }else{
                         echo "No regression required"
-                    }
-                    
-                    
+                    } 
                 }
             }
         }
 }
+
+    post {
+        always {
+            script {
+                def outputFilePath = "output.txt"
+                // Delete the output.txt file
+                deleteFile(file: outputFilePath)
+            }
+        }
+    }
 }
