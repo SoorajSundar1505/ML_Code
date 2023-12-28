@@ -68,7 +68,7 @@ pipeline {
             script {
                 def outputFilePath = "output.txt"
                 // Delete the output.txt file
-                delete file: outputFilePath
+                bat "del ${outputFilePath}"
             }
         }
     }
