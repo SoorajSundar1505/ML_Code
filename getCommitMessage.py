@@ -17,7 +17,7 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # If the prediction outcome is 1, check for keywords
     if outcome_prediction[0] == 1:
         # Define your keywords
-        keywords = ['keyword1', 'keyword2', 'keyword3']  # Replace with your actual keywords
+        keywords = ['login', 'home', 'group']  # Replace with your actual keywords
 
         # Check if any keyword is present in the commit message
         matched_keywords = [kw for kw in keywords if kw in commit_message.lower()]
