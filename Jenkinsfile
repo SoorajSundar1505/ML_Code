@@ -68,7 +68,7 @@ pipeline {
             script {
                 def outputFilePath = "output.txt"
                 // Delete the output.txt file
-                deleteFile(file: outputFilePath)
+                delete file: outputFilePath
             }
         }
     }
