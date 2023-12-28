@@ -43,7 +43,8 @@ pipeline {
                     }
                      def getCommitMessage = env.CHANGE_MESSAGE
                      def outputFilePath = "output.txt" 
-                     bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
+                     // bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
+                    bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
                     
                     // Read the content of the file
                     def outcome = readFile(file: outputFilePath).trim()
