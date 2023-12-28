@@ -52,9 +52,8 @@ pipeline {
                     }catch (Exception e) {
                             echo "Predicted outcome is not 1.So skipping the keyword part"
                     }
-
-                    def file = new File(outputFilePath)
-                    if(file.exists() && file.text){
+                    
+                    if(outcome=='login' || outcome=='group'){
                         echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
                         bat "mvn compile"
