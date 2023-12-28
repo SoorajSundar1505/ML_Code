@@ -41,12 +41,19 @@ pipeline {
                     }
                      def getCommitMessage = env.CHANGE_MESSAGE
                      bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
-                    
-                     def outputFilePath = "output.txt" 
-                    // Read the content of the file
-                    def outcome = readFile(file: outputFilePath).trim()
-                    // The outcome variable now contains the outcome prediction result
-                    echo "Outcome prediction result is: ${outcome}"
+
+                    try{
+                        def outputFilePath = "output.txt" 
+                        // Read the content of the file
+                        def outcome = readFile(file: outputFilePath).trim()
+                        // The outcome variable now contains the outcome prediction result
+                        echo "Outcome prediction result is: ${outcome}"
+                    }catch (Exception e) {
+                        // Handle NoSuchFileException
+                        if (e.getMessage().contains("java.nio.file.NoSuchFileException")) {
+                            echo "File not found: ${outputFilePath}"
+                            // Handle the case when the file is not found
+                        }
                     if(outcome=='login'){
                         echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
