@@ -48,11 +48,7 @@ pipeline {
                         // The outcome variable now contains the outcome prediction result
                         echo "Outcome prediction result is: ${outcome}"
                     }catch (Exception e) {
-                        // Handle NoSuchFileException
-                        if (e.getMessage().contains("java.nio.file.NoSuchFileException")) {
-                            echo "File not found: ${outputFilePath}"
                             echo "Predicted outcome is not 1.So skipping the keyword part"
-                        }
                     }
                     if(outcome=='login'){
                         echo "running regression suite....."
