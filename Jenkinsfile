@@ -41,11 +41,11 @@ pipeline {
                     }
                      def getCommitMessage = env.CHANGE_MESSAGE
                      bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
-
+                     def outcome=null
                     try{
                         def outputFilePath = "output.txt" 
                         // Read the content of the file
-                        def outcome = readFile(file: outputFilePath).trim()
+                        outcome = readFile(file: outputFilePath).trim()
                         // The outcome variable now contains the outcome prediction result
                         echo "Outcome prediction result is: ${outcome}"
                     }catch (Exception e) {
