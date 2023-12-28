@@ -14,11 +14,8 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # Predict the outcome for the commit
     outcome_prediction = model.predict(new_commit_vectorized)
 
-    # Return the outcome prediction result
-    # return str(outcome_prediction[0])
-    # Redirect the standard output to a file
-
-  if outcome_prediction[0] == 1:
+    # If the prediction outcome is 1, check for keywords
+    if outcome_prediction[0] == 1:
         # Define your keywords
         keywords = ['keyword1', 'keyword2', 'keyword3']  # Replace with your actual keywords
 
@@ -40,8 +37,6 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # Exit with a success code
     sys.exit(0)
 
-
-
 if __name__ == "__main__":
     import sys
 
@@ -49,9 +44,6 @@ if __name__ == "__main__":
     print(f"Received commit message: {commit_message}")
 
     # Call the function and get the matched keywords
-    matched_keywords = predict_commit_outcome(commit_message)
-
-    if matched_keywords is not None:
-        print(f"Matched Keywords are: {matched_keywords}")
+    predict_commit_outcome(commit_message)
 
     print("Prediction process completed.")
