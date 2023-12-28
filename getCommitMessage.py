@@ -18,7 +18,7 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # return str(outcome_prediction[0])
     # Redirect the standard output to a file
 
-  if outcome_prediction[0] == 1:
+  if outcome_prediction[0]==1:
         # Define your keywords
         keywords = ['login', 'home', 'keyword3']  # Replace with your actual keywords
 
