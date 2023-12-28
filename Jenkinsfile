@@ -25,7 +25,6 @@ pipeline {
                 }
             }
         }
-
         stage('Read Commit Message and decide whether need to run regression') {
             steps {
                 script {
