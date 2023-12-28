@@ -50,7 +50,7 @@ pipeline {
                     def outcome = readFile(file: outputFilePath).trim()
                     // The outcome variable now contains the outcome prediction result
                     echo "Outcome prediction result is: ${outcome}"
-                    if(outcome=="1"){
+                    if(outcome!=null){
                         echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
                         bat "mvn compile"
