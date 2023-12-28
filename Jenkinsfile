@@ -51,7 +51,7 @@ pipeline {
                         // Handle NoSuchFileException
                         if (e.getMessage().contains("java.nio.file.NoSuchFileException")) {
                             echo "File not found: ${outputFilePath}"
-                            // Handle the case when the file is not found
+                            echo "Predicted outcome is not 1.So skipping the keyword part"
                         }
                     }
                     if(outcome=='login'){
