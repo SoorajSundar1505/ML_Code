@@ -40,10 +40,9 @@ pipeline {
                         error "Failed to retrieve the commit message."
                     }
                      def getCommitMessage = env.CHANGE_MESSAGE
-                     def outputFilePath = "output.txt" 
-                     // bat(script: "python Integration.py \"${getCommitMessage}\"", returnStatus: true)
-                    bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
+                     bat(script: "python getCommitMessage.py \"${getCommitMessage}\"", returnStatus: true)
                     
+                     def outputFilePath = "output.txt" 
                     // Read the content of the file
                     def outcome = readFile(file: outputFilePath).trim()
                     // The outcome variable now contains the outcome prediction result
