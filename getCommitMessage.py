@@ -7,7 +7,6 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
     # Load the model and vectorizer
     model = joblib.load(model_path)
     vectorizer = joblib.load(vectorizer_path)
-
     # Feature extraction
     new_commit_vectorized = vectorizer.transform([commit_message])
 
