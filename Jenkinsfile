@@ -54,6 +54,7 @@ pipeline {
                             echo "File not found: ${outputFilePath}"
                             // Handle the case when the file is not found
                         }
+                    }
                     if(outcome=='login'){
                         echo "running regression suite....."
                         git 'https://github.com/SoorajSundar1505/restAPI'
