@@ -25,8 +25,8 @@ def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_pa
         # If any keyword is matched, save the commit message and matched keyword(s) to a file
         if matched_keywords:
             with open("output.txt", "w") as f:
-                print(f"Commit Message: {commit_message}", file=f)
-                print("Matched Keywords:", file=f)
+                print(f"Commit Message: {commit_message}")
+                print("Matched Keywords:")
                 for matched_keyword in matched_keywords:
                     print(matched_keyword, file=f)
         else:
