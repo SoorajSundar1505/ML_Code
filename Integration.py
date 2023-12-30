@@ -3,6 +3,7 @@ import json
 import sklearn.externals as extjoblib
 import joblib
 
+
 def predict_commit_outcome(commit_message, model_path='model.pkl', vectorizer_path='vectorizer.pkl'):
     # Load the model and vectorizer
     model = joblib.load(model_path)
